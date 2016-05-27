@@ -1,0 +1,41 @@
+Name:		ipfixcap
+Version:	@VERSION@
+Release:	1%{?dist}
+Summary:	Multithreaded replacement for flowcap	
+
+Group:		Applications/System
+License: 	GPLv2
+URL:		https://github.com/j-o-h-n-g/ipfixcap	
+Source: 	ipfixcap-%{version}.tar.gz
+
+BuildRequires: silk-devel > 3.0.0, libfixbuf-devel > 1.6.0, glib2-devel > 2.10, pkgconfig, libsystemd >= 219
+Requires: silk-common > 3.0.0 , libfixbuf > 1.6.0, glib2 > 2.10, libsystemd-devel >= 219
+
+%description
+A multithreaded replacement for flowcap
+
+
+
+%prep
+%setup -q
+
+
+%build
+%configure
+make %{?_smp_mflags}
+
+
+%install
+make install DESTDIR=%{buildroot}
+
+
+%files
+%defattr(-,root,root)
+%{_sbindir}/ipfixcap
+%attr(755,root,root) %{_sysconfdir}/init.d/ipfixcap
+%config(noreplace) %{_sysconfdir}/sysconfig/ipfixcap.conf
+
+
+
+%changelog
+

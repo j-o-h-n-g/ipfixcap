@@ -1,0 +1,86 @@
+### ipfixcap configuration file  -*- sh -*-
+##
+## This is a /bin/sh file that gets loaded by the init.d/ipfixcap
+## wrapper script, and this file must follow /bin/sh syntax rules.
+
+# Set to non-empty value to enable ipfixcap
+ENABLED=
+
+# These are convenience variables for setting other values in this
+# configuration file; their use is not required.
+statedirectory=@localstatedir@/lib/ipfixcap
+
+# If CREATE_DIRECTORIES is set to "yes", the directories named in this
+# file will be created automatically if they do not already exist
+CREATE_DIRECTORIES=no
+
+# Full path of the directory containing the "@myprog@" program
+BIN_DIR=@sbindir@
+
+# Full path to sensor configuration file
+SENSOR_CONFIG=
+
+# List of probes to use from the sensor configuration file.  Comma
+# separated, no spaces.  Leave blank if all probe definitions should
+# be used.
+PROBES=
+
+# Amount of disk space before file quanta times out
+MAX_FILE_SIZE=1M
+
+# Number of seconds before file quanta time out
+TIMEOUT=60
+
+# Offset (in seconds) from midnight that files time out.  Set to 0 to
+# get time offsets from midnight.  E.g.: for TIMEOUT of 900: :00, :15,
+# :30, :45 for each hour.  If unset, uses offsets based on when
+# ipfixcap is started.
+CLOCK_TIME=
+
+# Location where ipfixcap files will be created
+DESTINATION_DIR=${statedirectory}/destination
+
+# Minimum amount of free space on disk until we stop
+FREESPACE_MIN=1g
+
+# Maximum percentage of the disk to use
+FULLSPACE_MAX=98.00
+
+# Number of UDP listener threads
+THREADS=
+
+# Single port to receive IPFIX on
+PORT=
+
+# Setting this environment variable to 1 causes lowcap to log the
+# NetFlowV9/IPFIX templates that it receives.
+SILK_IPFIX_PRINT_TEMPLATES=
+
+###
+
+# The type of logging to use.  Valid values are "legacy" and "syslog".
+LOG_TYPE=syslog
+
+# The lowest level of logging to actually log.  Valid values are:
+# emerg, alert, crit, err, warning, notice, info, debug
+LOG_LEVEL=info
+
+# The full path of the directory where the log files will be written
+# when LOG_TYPE is "legacy".
+LOG_DIR=${statedirectory}/log
+
+# The full path of the directory where the PID file will be written
+PID_DIR=${LOG_DIR}
+
+# The user this program runs as; root permission is required only when
+# ipfixcap listens on a privileged port.
+USER=root
+#USER=`whoami`  # run as user invoking the script
+
+# Extra options to pass to ipfixcap
+EXTRA_OPTIONS=
+
+# Extra environment variables to set when running ipfixcap.  These
+# should be specified as VAR=value pairs as shown here:
+#EXTRA_ENVVAR='FOO=1 BAR=baz'
+EXTRA_ENVVAR=
