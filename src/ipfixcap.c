@@ -162,7 +162,7 @@ void *process(void *args)
 			while (status == STATUS_GO) {
 				/* For the time being let this thread spin for ever */
 	                        /* Wait up to second for data */
-       		                queue_data = g_async_queue_timeout_pop(queue, 1024);
+       		                queue_data = g_async_queue_timeout_pop(queue, 1024 * 1024);
 
                        		 /* If nothing recived try again (checking quit) */
                         	if (queue_data == NULL)
@@ -276,7 +276,7 @@ void *process(void *args)
 		while ((g_timer_elapsed(timer, NULL) < options.timeout) && (skStreamGetUpperBound(stream) < options.maxfilesize)) {
 
 			/* Wait up to second for data */
-			queue_data = g_async_queue_timeout_pop(queue, 1024);
+			queue_data = g_async_queue_timeout_pop(queue, 1024 * 1024);
 
 			/* If nothing recived try again (checking timer) */
 			if (queue_data == NULL)
